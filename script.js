@@ -5,8 +5,8 @@ import "./checkboards.js";
 
 // Initialisation
 document.addEventListener("mousemove", logMouse)
-let canva = document.getElementById("canvas");
-canva.addEventListener("mousedown", clickMouse)
+let canvasCheckboard = document.getElementById("canvas");
+canvasCheckboard.addEventListener("mousedown", clickMouse)
 const tileSize = 50;
 
 // We get the position of the mouse
@@ -14,44 +14,45 @@ let positon = document.getElementById("position")
 let positonClick = document.getElementById("positionClick")
 
 // Functions
-function drawSquare(drawContext, color, tileSize, coords) {
+function drawSquare(drawContext, color, coords) {
     drawContext.fillStyle = "color";
     drawContext.fillRect(coords.x*tileSize, coords.y*tileSize, tileSize, tileSize);
 }
 
 function drawCheckboard() {
-    const drawContext = canva.getContext("2d");
- 
+    const drawContext = canvasCheckboard.getContext("2d");
+    
     for (let y = 0; y < colorCheckboard.length; y++) {
         for (let x = 0; x < colorCheckboard[y].length + 10; x++) {
             coords = {x: x, y: y};
             if (colorCheckboard[y][x] == 1) {
-                drawSquare(drawContext, "brown", tileSize, coords);
+                drawSquare(drawContext, "brown", coords);
             } 
             if (colorCheckboard[y][x] == 2) {
-                drawSquare(drawContext, "gray", tileSize, coords);
+                drawSquare(drawContext, "gray", coords);
             } 
         }
     }
 }
 
-function drawPlayer() {
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+function drawPlayer(drawContext, color, coords) {
+    drawContext.fillStyle = "black";
+    const circle = new Path2D();
+    circle.arc(tileSize/2 +x*tileSize, tileSize/2 + y*tileSize, 20, 0, 2*Math.PI);
+    drawContext.fill(circle);
+}
+
+function drawPlayersOnCheckboard() {
+    const drawContext = canvasCheckboard.getContext("2d");
 
     for (let y = 0; y < colorCheckboard.length; y++) {
         for (let x = 0; x < colorCheckboard[y].length; x++) {
+            coords = {x: x, y: y};
             if (playerCheckboard[y][x] == 1) {
-                ctx.fillStyle = "black"
-                const circle = new Path2D();
-                circle.arc(tileSize/2 +x*tileSize, tileSize/2 + y*tileSize, 20, 0, 2*Math.PI)
-                ctx.fill(circle)
+                drawPlayer(drawContext, "black", coords);
             } 
             if (playerCheckboard[y][x] == 2) {
-                ctx.fillStyle = "white"
-                const circle = new Path2D();
-                circle.arc(tileSize/2 +x*tileSize, tileSize/2 + y*tileSize, 20, 0, 2*Math.PI)
-                ctx.fill(circle)
+                drawPlayer(drawContext, "white", coords);
             }  
         }
     }
@@ -67,8 +68,7 @@ function clickMouse(e) {
 }
 
 function playAMove(x, y) {
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+    const drawContext = canvasCheckboard.getContext("2d");
     for (let j = 0; j < playerCheckboard.length; j++) {
         for (let i = 0; i < playerCheckboard[j].length; i++) {
             let posX = Math.floor(x/tileSize); 
@@ -100,5 +100,5 @@ function playAMove(x, y) {
 }
 
 drawCheckboard();
-drawPlayer();
+drawPlayersOnCheckboard();
 
