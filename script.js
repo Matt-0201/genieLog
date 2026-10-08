@@ -3,34 +3,33 @@
 
 import "./checkboards.js";
 
-// Initiate events 
+// Initialisation
 document.addEventListener("mousemove", logMouse)
-
-// Values we use
 let canva = document.getElementById("canvas");
 canva.addEventListener("mousedown", clickMouse)
-console.log(canva.width)
+const tileSize = 50;
 
 // We get the position of the mouse
 let positon = document.getElementById("position")
 let positonClick = document.getElementById("positionClick")
 
-// Initialisation of the size of a tile in pixel
-const tileSize = 50;
+// Functions
+function drawSquare(drawContext, color, tileSize, coords) {
+    drawContext.fillStyle = "color";
+    drawContext.fillRect(coords.x*tileSize, coords.y*tileSize, tileSize, tileSize);
+}
 
-function drawGrid() {
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+function drawCheckboard() {
+    const drawContext = canva.getContext("2d");
  
     for (let y = 0; y < colorCheckboard.length; y++) {
         for (let x = 0; x < colorCheckboard[y].length + 10; x++) {
+            coords = {x: x, y: y};
             if (colorCheckboard[y][x] == 1) {
-                ctx.fillStyle = "brown";
-                ctx.fillRect(x*tileSize, y*tileSize, tileSize, tileSize);
+                drawSquare(drawContext, "brown", tileSize, coords);
             } 
             if (colorCheckboard[y][x] == 2) {
-                ctx.fillStyle = "gray";
-                ctx.fillRect(x*tileSize, y*tileSize, tileSize, tileSize);
+                drawSquare(drawContext, "gray", tileSize, coords);
             } 
         }
     }
@@ -58,9 +57,6 @@ function drawPlayer() {
     }
 }
 
-drawGrid();
-drawPlayer();
-
 function logMouse(e) {
     positon.innerHTML = "Position: " + e.screenX + "/" + e.screenY;
 }
@@ -85,7 +81,7 @@ function playAMove(x, y) {
                 playerCheckboard[posY][posX] = 0;
                 playerCheckboard[newY][newX] = 1;
                 ctx.clearRect(posX*tileSize, posY*tileSize, 50, 50)
-                drawGrid()
+                drawCheckboard()
                 drawPlayer()
             } else if (playerCheckboard[posY][posX] == 2) {
                 console.log("White played")
@@ -94,7 +90,7 @@ function playAMove(x, y) {
                 playerCheckboard[posY][posX] = 0;
                 playerCheckboard[newY][newX] = 2;
                 ctx.clearRect(posX*tileSize, posY*tileSize, 50, 50)
-                drawGrid()
+                drawCheckboard()
                 drawPlayer()
             } else {
                 console.log("No pawn here")
@@ -102,3 +98,7 @@ function playAMove(x, y) {
         }
     }
 }
+
+drawCheckboard();
+drawPlayer();
+
