@@ -1,13 +1,12 @@
 import { database } from "./database.js";
 import { libGsmClient, LibGsmSms } from "./libGSM.js";
 import { libSmtpClient, LibSmtpEmail } from "./libSMTP.js";
+import { OTPGenerator } from "./OTPGenerator.js";
 
 const smscNumber = "+33 6 89 00 40 00"
 
 export function sendOTP(accountId) {
-    const randomSeed = Math.floor(Math.random() * 100);
-    const timeSeed = Date.now % 100;
-    const otp = `${randomSeed}${timeSeed}`;
+    const otp = OTPGenerator();
 
     const account = database.fetchAccount(accountId);
     if (account.preferSMS) {
