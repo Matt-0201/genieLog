@@ -1,0 +1,1 @@
+function extractIngredients(textRecipe, nbInit, nbVoulu) {}  // --> ingredientList 
