@@ -1,6 +1,13 @@
 export const libSmtpClient = {
     connect() { },
-    send(email) { }
+    sendEmail(emailContent, address) {
+        libSmtpClient.connect();
+        const email = new LibSmtpEmail();
+        email.senderAddress = "noreply@auth.com"
+        email.recipientAddress = address;
+        email.content = emailContent;
+        libSmtpClient.send(email);
+    }
 }
 
 export class LibSmtpEmail {
