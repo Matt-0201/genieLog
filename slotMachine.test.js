@@ -27,4 +27,11 @@ test("neither two first nor two last equals", function() {
     assert.equal(0, result);
 });
 
+test("three equals symbols", function() {
+    var bet = 10;
+    var symbols = ['+', '+', '+'];
+    var result = slotMachine(bet, symbols);
+    assert.equal(50, result);
+});
+
 
