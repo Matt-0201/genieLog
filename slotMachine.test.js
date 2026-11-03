@@ -34,4 +34,11 @@ test("three equals symbols", function() {
     assert.equal(50, result);
 });
 
+test("three $", function() {
+    var bet = 50;
+    var symbols = ['$', '$', '$'];
+    var result = slotMachine(bet, symbols);
+    assert.equal(1000, result);
+});
+
 

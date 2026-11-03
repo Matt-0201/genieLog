@@ -3,6 +3,8 @@ export function slotMachine(bet, result) {
 	var second = result[1];
 	var third = result[2];
 	if (first == second && second == third) {
+		if (first == '$')
+			return bet*20;
 		return bet*5;
 	} else if (second == third) {
 		return bet*2;
