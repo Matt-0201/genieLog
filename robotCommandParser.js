@@ -3,6 +3,8 @@ export function robotCommandParser(hexaCommand) {
         return "moveForward";
     } else if (hexaCommand == "0X789") {
         return "moveBackward";
+    } else if (hexaCommand == "0XABC") {
+        return "stop";
     } else {
         return 0;
     }

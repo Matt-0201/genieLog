@@ -10,6 +10,10 @@ test("command 0X789 to moveBackward", function () {
     assert.equal(robotCommandParser("0X789"), "moveBackward");
 });
 
+test("command 0XABC to stop", function () {
+    assert.equal(robotCommandParser("0XABC"), "stop");
+});
+
 test("unknown command return 0", function () {
     assert.equal(robotCommandParser("blank"), 0);
 });
