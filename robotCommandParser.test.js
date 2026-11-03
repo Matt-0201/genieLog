@@ -14,10 +14,19 @@ test("command 0XABC to stop", function () {
     assert.equal(robotCommandParser(["0XABC"]), "stop");
 });
 
-test("a list of hexa commands", function () {
-    var hexaCommands = ["0X123", "0X123", "0X789", "0XABC"];
-    var expectingCommand = ["moveForward", "moveForward", "moveBackward", "stop"];
+test("a list of hexa commands without repetition", function () {
+    var hexaCommands = ["0X123", "0X789", "0XABC"];
+    var expectingCommand = ["moveForward", "moveBackward", "stop"];
     var actualCommand = robotCommandParser(hexaCommands);
+    var isEqual = listsCompare(expectingCommand, actualCommand)
+    assert.equal(isEqual, true);
+});
+
+test("a list of hexa commands with repetition", function () {
+    var hexaCommands = ["0X123", "3", "0X789", "2", "0XABC"];
+    var expectingCommand = ["moveForward", "moveForward", "moveForward", "moveBackward", "moveBackward", "stop"];
+    var actualCommand = robotCommandParser(hexaCommands);
+    console.log(actualCommand)
     var isEqual = listsCompare(expectingCommand, actualCommand)
     assert.equal(isEqual, true);
 });
