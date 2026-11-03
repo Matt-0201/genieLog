@@ -10,5 +10,21 @@ test("two first equal", function() {
     var bet = 5;
     var symbols = ['+', '+', '%'];
     var result = slotMachine(bet, symbols);
-    assert(bet*2, result);
+    assert.equal(10, result);
 });
+
+test("two last equal", function() {
+    var bet = 5;
+    var symbols = ['-', '+', '+'];
+    var result = slotMachine(bet, symbols);
+    assert.equal(10, result);
+});
+
+test("neither two first nor two last equals", function() {
+    var bet = 5;
+    var symbols = ['-', '%', '+'];
+    var result = slotMachine(bet, symbols);
+    assert.equal(0, result);
+});
+
+
