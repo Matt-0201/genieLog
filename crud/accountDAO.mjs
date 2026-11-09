@@ -15,6 +15,14 @@ export const accountDAO = {
     }
     return ACCOUNT_LIST_NO_DATE;
   },
-  updateAccount(account) {},
+  updateAccount(account) {
+    for (let i = 0; i<ACCOUNT_LIST.length; i++) {
+      if (ACCOUNT_LIST[i].id == account.id) {
+        ACCOUNT_LIST[i].lastName = account.lastName;
+        ACCOUNT_LIST[i].firstName = account.firstName;
+      }
+    }
+    return;
+  },
   retrieveAccount(id) {},
 };
