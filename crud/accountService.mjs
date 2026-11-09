@@ -25,5 +25,7 @@ export const accountService = {
     actualAccount.firstName = firstName;
     accountDAO.updateAccount(actualAccount);
   },
-  getAccount(id) {},
+  getAccount(id) {
+    return accountDAO.retrieveAccount(id);
+  },
 };

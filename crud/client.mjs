@@ -11,5 +11,11 @@ console.log(accountService.getAccountList());
 console.log("------- saveAccount call (no console.log) ------- ")
 accountService.saveAccount(accountService.getAccountList()[0].id, 'Mamatt', 'TestTest');
 
-console.log("------- getAccountList call (again to verify)-------")
+console.log("------- getAccountList call (modification in db) -------")
+console.log(accountService.getAccountList());
+
+console.log("------- getAccount call -------")
+console.log(accountService.getAccount(accountService.getAccountList()[0].id));
+
+console.log("------- getAccountList call (NO modification in db) -------")
 console.log(accountService.getAccountList());

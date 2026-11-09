@@ -16,13 +16,14 @@ export const accountDAO = {
     return ACCOUNT_LIST_NO_DATE;
   },
   updateAccount(account) {
-    for (let i = 0; i<ACCOUNT_LIST.length; i++) {
-      if (ACCOUNT_LIST[i].id == account.id) {
-        ACCOUNT_LIST[i].lastName = account.lastName;
-        ACCOUNT_LIST[i].firstName = account.firstName;
-      }
-    }
-    return;
+    const newAccount = ACCOUNT_LIST.find((acc) => acc.id == account.id);
+
+    newAccount.firstName = account.firstName,
+    newAccount.lastName = account.lastName
   },
-  retrieveAccount(id) {},
+  retrieveAccount(id) {
+    const account = ACCOUNT_LIST.find((account) => account.id == id);
+    const {firstName, lastName, ...rest} = account;
+    return {...rest, name: firstName + " " + lastName};
+  },
 };
